@@ -44,7 +44,7 @@ def fetch_activation_bytes(username, password):
     url = base_url + query_string
     # print(url, file=sys.stderr)
     # http://chromedriver.storage.googleapis.com/index.html?path=2.19/
-    driver.get('https://www.audible.com/')
+    driver.get('https://www.audible.com/?ipRedirectOverride=true')
     driver.get(url)
     search_box = driver.find_element_by_id('ap_email')
     search_box.send_keys(username)
