@@ -1,6 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 from __future__ import print_function
+from getpass import getpass
 import time
 from selenium import webdriver
 from urllib import urlencode
@@ -129,8 +130,7 @@ def extract_activation_bytes(data):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: %s <username> <password>" % sys.argv[0])
-        sys.exit(1)
+    username = raw_input("Username:")
+    password = getpass("Password:")
 
-    fetch_activation_bytes(sys.argv[1], sys.argv[2])
+    fetch_activation_bytes(username, password)
