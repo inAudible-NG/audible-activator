@@ -1,11 +1,12 @@
-# audible-activator
+# audible-activator (audible.de)
 
-Retrieves your activation data (activation_bytes) from Audible servers.
+Retrieves your activation data (activation_bytes) from Audible servers for German users.
 
 ## Usage
 
 ```
-$ ./audible-activator.py <username> <password>
+$ ./audible-activator.py 
+  enter <username> and <password>
 
 $ mpv --demuxer-lavf-o=activation_bytes=CAFED00D sample.aax
 
