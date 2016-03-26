@@ -25,9 +25,9 @@ def fetch_activation_bytes(username, password):
 
     # Step 1
     if '@' in username:  # Amazon login using email address
-        base_url = "https://www.amazon.com/ap/signin?"
+        base_url = "https://www.amazon.de/ap/signin?"
     else:  # Audible member login using username (untested!)
-        base_url = "https://www.audible.com/sign-in/ref=ap_to_private?forcePrivateSignIn=true&rdPath=https%3A%2F%2Fwww.audible.com%2F%3F"
+        base_url = "https://www.audible.de/sign-in/ref=ap_to_private?forcePrivateSignIn=true&rdPath=https%3A%2F%2Fwww.audible.de%2F%3F"
     # fake_hash = hashlib.sha1(os.urandom(128)).digest()
     # playerId = base64.encodestring(fake_hash).rstrip()  # generate base64 digest of a random 20 byte string ;)
     playerId = base64.encodestring(hashlib.sha1("").digest()).rstrip()
@@ -36,14 +36,14 @@ def fetch_activation_bytes(username, password):
         'openid.identity': 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.claimed_id': 'http://specs.openid.net/auth/2.0/identifier_select',
         'openid.mode': 'logout',
-        'openid.assoc_handle': 'amzn_audible_us',
-        'openid.return_to': 'https://www.audible.com/player-auth-token?playerType=software&playerId=%s=&bp_ua=y&playerModel=Desktop&playerManufacturer=Audible' % (playerId)
+        'openid.assoc_handle': 'amzn_audible_de',
+        'openid.return_to': 'https://www.audible.de/player-auth-token?playerType=software&playerId=%s=&bp_ua=y&playerModel=Desktop&playerManufacturer=Audible' % (playerId)
     }
     query_string = urlencode(payload)
     url = base_url + query_string
     # print(url, file=sys.stderr)
     # http://chromedriver.storage.googleapis.com/index.html?path=2.19/
-    driver.get('https://www.audible.com/?ipRedirectOverride=true')
+    driver.get('https://www.audible.de/?ipRedirectOverride=true')
     driver.get(url)
     search_box = driver.find_element_by_id('ap_email')
     search_box.send_keys(username)
@@ -55,7 +55,7 @@ def fetch_activation_bytes(username, password):
         search_box.submit()
 
     # Step 2
-    driver.get('https://www.audible.com/player-auth-token?playerType=software&bp_ua=y&playerModel=Desktop&playerId=%s&playerManufacturer=Audible&serial=' % (playerId))
+    driver.get('https://www.audible.de/player-auth-token?playerType=software&bp_ua=y&playerModel=Desktop&playerId=%s&playerManufacturer=Audible&serial=' % (playerId))
     current_url = driver.current_url
     o = urlparse(current_url)
     data = dict(parse_qsl(o.query))
