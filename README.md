@@ -30,7 +30,7 @@ $ ffplay -activation_bytes CAFED00D sample.aax
 
 ## Quick Setup
 
-Python 2 is required along with Selenium and ChromeDriver.
+Python 2 is required along with Selenium, ChromeDriver and Google Chrome.
 
 ```
 pip install requests  # use "easy_install" if pip is missing
@@ -38,6 +38,8 @@ pip install requests  # use "easy_install" if pip is missing
 pip install selenium
 
 Download and extract the correct zip file from the https://sites.google.com/a/chromium.org/chromedriver/downloads site to this folder.
+
+Download Google Chrome from https://www.google.com/chrome/ and install it on your computer.
 
 ```
 
