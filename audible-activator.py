@@ -126,9 +126,23 @@ if __name__ == "__main__":
                       dest="player_id",
                       default=None,
                       help="Player ID in hex (for debugging, not for end users)",)
+    parser.add_option("--user",
+                      action="store",
+                      dest="user",
+                      default=False,
+                      help="Audible username. If both --user and --password are present doesn't ask for Audible credentials interactively.",)
+    parser.add_option("--password",
+                      action="store",
+                      dest="password",
+                      default=False,
+                      help="Audible password. If both --user and --password are present doesn't ask for Audible credentials interactively.",)
     (options, args) = parser.parse_args()
 
-    username = raw_input("Username: ")
-    password = getpass("Password: ")
+    if options.user and options.password:
+        username = options.user
+        password = options.password
+    else:
+        username = raw_input("Username: ")
+        password = getpass("Password: ")
 
     fetch_activation_bytes(username, password, options)
