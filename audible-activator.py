@@ -69,6 +69,10 @@ def fetch_activation_bytes(username, password, options):
         search_box = driver.find_element_by_id('ap_password')
         search_box.send_keys(password)
         search_box.submit()
+        if options.two_factor:
+            search_box = driver.find_element_by_id('auth-mfa-otpcode')
+            search_box.send_keys(raw_input("Enter Two-Step Verification Code: "))
+            search_box.submit()
 
     # Step 2
     driver.get(base_url + 'player-auth-token?playerType=software&bp_ua=y&playerModel=Desktop&playerId=%s&playerManufacturer=Audible&serial=' % (player_id))
@@ -126,23 +130,14 @@ if __name__ == "__main__":
                       dest="player_id",
                       default=None,
                       help="Player ID in hex (for debugging, not for end users)",)
-    parser.add_option("--username",
-                      action="store",
-                      dest="username",
+    parser.add_option("-t", "--two-factor",
+                      action="store_true",
+                      dest="two_factor",
                       default=False,
-                      help="Audible username, use along with the --password option")
-    parser.add_option("--password",
-                      action="store",
-                      dest="password",
-                      default=False,
-                      help="Audible password")
+                      help="Use this option to enable two factor authentication",)
     (options, args) = parser.parse_args()
 
-    if options.username and options.password:
-        username = options.username
-        password = options.password
-    else:
-        username = raw_input("Username: ")
-        password = getpass("Password: ")
+    username = raw_input("Username: ")
+    password = getpass("Password: ")
 
     fetch_activation_bytes(username, password, options)
