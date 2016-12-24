@@ -135,9 +135,23 @@ if __name__ == "__main__":
                       dest="two_factor",
                       default=False,
                       help="Use this option to enable two factor authentication",)
+    parser.add_option("--username",
+                      action="store",
+                      dest="username",
+                      default=False,
+                      help="Audible username, use along with the --password option")
+    parser.add_option("--password",
+                      action="store",
+                      dest="password",
+                      default=False,
+                      help="Audible password")
     (options, args) = parser.parse_args()
 
-    username = raw_input("Username: ")
-    password = getpass("Password: ")
+    if options.username and options.password:
+        username = options.username
+        password = options.password
+    else:
+        username = raw_input("Username: ")
+        password = getpass("Password: ")
 
     fetch_activation_bytes(username, password, options)
