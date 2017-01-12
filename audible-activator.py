@@ -14,6 +14,7 @@ import requests
 import os
 import common
 import binascii
+import distutils.spawn
 
 
 def fetch_activation_bytes(username, password, options):
@@ -48,10 +49,7 @@ def fetch_activation_bytes(username, password, options):
         'openid.return_to': base_url + 'player-auth-token?playerType=software&playerId=%s=&bp_ua=y&playerModel=Desktop&playerManufacturer=Audible' % (player_id)
     }
 
-    if sys.platform == 'win32':
-        chromedriver_path = "chromedriver.exe"
-    else:
-        chromedriver_path = "./chromedriver"
+    chromedriver_path = distutils.spawn.find_executable('chromedriver')
 
     driver = webdriver.Chrome(chrome_options=opts,
                               executable_path=chromedriver_path)
