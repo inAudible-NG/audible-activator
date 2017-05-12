@@ -48,13 +48,16 @@ def fetch_activation_bytes(username, password, options):
         'openid.return_to': base_url + 'player-auth-token?playerType=software&playerId=%s=&bp_ua=y&playerModel=Desktop&playerManufacturer=Audible' % (player_id)
     }
 
-    if sys.platform == 'win32':
-        chromedriver_path = "chromedriver.exe"
+    if options.usefirefox:
+        driver = webdriver.Firefox()
     else:
-        chromedriver_path = "./chromedriver"
+        if sys.platform == 'win32':
+            chromedriver_path = "chromedriver.exe"
+        else:
+            chromedriver_path = "./chromedriver"
 
-    driver = webdriver.Chrome(chrome_options=opts,
-                              executable_path=chromedriver_path)
+        driver = webdriver.Chrome(chrome_options=opts,
+                                  executable_path=chromedriver_path)
 
     query_string = urlencode(payload)
     url = login_url + query_string
@@ -69,6 +72,8 @@ def fetch_activation_bytes(username, password, options):
         search_box = driver.find_element_by_id('ap_password')
         search_box.send_keys(password)
         search_box.submit()
+    	time.sleep(1) # give the page some time to load
+    
 
     # Step 2
     driver.get(base_url + 'player-auth-token?playerType=software&bp_ua=y&playerModel=Desktop&playerId=%s&playerManufacturer=Audible&serial=' % (player_id))
@@ -99,7 +104,7 @@ def fetch_activation_bytes(username, password, options):
     with open("activation.blob", "wb") as f:
         f.write(response.content)
     activation_bytes, _ = common.extract_activation_bytes(response.content)
-    print(activation_bytes)
+    print("activation_bytes: " + activation_bytes)
 
     # Step 5 (de-register again to stop filling activation slots)
     s.get(durl, headers=headers)
@@ -116,6 +121,11 @@ if __name__ == "__main__":
                       dest="debug",
                       default=False,
                       help="run program in debug mode, enable this for 2FA enabled accounts or for authentication debugging")
+    parser.add_option("-f", "--firefox",
+                      action="store_true",
+                      dest="usefirefox",
+                      default=False,
+                      help="use this option to use firefox instead of chrome for web requests",)
     parser.add_option("-l", "--lang",
                       action="store",
                       dest="lang",
