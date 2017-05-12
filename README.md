@@ -91,6 +91,10 @@ all used up).
 * In case of login problems use the `./audible-activator.py -d` command  to run
 the program in debugging mode and to login manually.
 
+* Are you trying to run `./audible-activator.py` over SSH, or without an X server 
+running?  Don't do that.  Although it's a command-line programme, it needs to be 
+connected to an X server to create a Chrome instance.
+
 * This program is pretty short and easy to debug. I cannot provide end-user
 support but I would be very happy to accept patches.
 
