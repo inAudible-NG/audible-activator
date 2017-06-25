@@ -3,6 +3,11 @@
 A script to retrieve your activation data (activation_bytes) from Audible
 servers.
 
+## Donations
+
+Donations are gladly accepted. Please send BTC to `1FDFp8kWjnUCGTLw1SVkim6kRnYDge2vYh`
+to support the development, and maintenance of this project. Thank you!
+
 ## Usage
 
 ```
