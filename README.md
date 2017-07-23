@@ -43,14 +43,13 @@ Python 2 is required along with Selenium, Requests, ChromeDriver, and Google
 Chrome.
 
 ```
-pip install requests  # use "easy_install" if pip is missing
-
-pip install selenium
+pip install -r requirements.txt  # use "easy_install" if pip is not available
 ```
 
 Download and extract the correct ChromeDriver zip file [from
 here](https://sites.google.com/a/chromium.org/chromedriver/downloads) to this
 folder.
+  - On macOS, it is available with HomeBrew: `brew install chromedriver && ln -s /usr/local/bin/chromedriver`
 
 Download Google Chrome from https://www.google.com/chrome/ and install it on
 your computer.
