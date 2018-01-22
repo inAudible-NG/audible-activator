@@ -34,6 +34,8 @@ $ ./audible-activator.py -l de  # for "de" users
 
 $ mpv --demuxer-lavf-o=activation_bytes=CAFED00D sample.aax
 
+$ echo -e "\ndemuxer-lavf-o=activation_bytes=CAFED00D" >> ~/.config/mpv/mpv.conf  # for convenience
+
 $ ffplay -activation_bytes CAFED00D sample.aax
 ```
 
