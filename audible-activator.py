@@ -57,7 +57,7 @@ def fetch_activation_bytes(username, password, options):
         if sys.platform == 'win32':
             chromedriver_path = "chromedriver.exe"
         else:
-            chromedriver_path = "./chromedriver"
+            chromedriver_path = "/usr/lib/chromium-browser/chromedriver"
 
         driver = webdriver.Chrome(chrome_options=opts,
                                   executable_path=chromedriver_path)
