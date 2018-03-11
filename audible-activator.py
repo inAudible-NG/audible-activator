@@ -56,6 +56,8 @@ def fetch_activation_bytes(username, password, options):
     else:
         if sys.platform == 'win32':
             chromedriver_path = "chromedriver.exe"
+        elif os.path.isfile("/usr/lib/chromium-browser/chromedriver"): # Ubuntu package chromedriver path
+            chromedriver_path = "/usr/lib/chromium-browser/chromedriver"
         else:
             chromedriver_path = "./chromedriver"
 
