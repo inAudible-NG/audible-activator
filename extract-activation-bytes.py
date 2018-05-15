@@ -25,6 +25,6 @@ if __name__ == "__main__":
     with open(sys.argv[1], "rb") as f:
         activation_bytes, output = common.extract_activation_bytes(f.read())
         print(activation_bytes)
-        print(template % (output[0], output[1], output[2],
+        print((template % (output[0], output[1], output[2],
                           output[3], output[4], output[5],
-                          output[6], output[7]))
+                          output[6], output[7])))

@@ -1,13 +1,13 @@
 #!/usr/bin/env python2
 
-from __future__ import print_function
+
 from getpass import getpass
 from optparse import OptionParser
 import sys
 import time
 from selenium import webdriver
-from urllib import urlencode
-from urlparse import urlparse, parse_qsl
+from urllib.parse import urlencode
+from urllib.parse import urlparse, parse_qsl
 import hashlib
 import base64
 import requests
@@ -154,7 +154,7 @@ if __name__ == "__main__":
         username = options.username
         password = options.password
     else:
-        username = raw_input("Username: ")
+        username = input("Username: ")
         password = getpass("Password: ")
 
     fetch_activation_bytes(username, password, options)
