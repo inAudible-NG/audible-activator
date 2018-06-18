@@ -1,6 +1,5 @@
 #!/usr/bin/env python2
 
-from __future__ import print_function
 import traceback
 import binascii
 import sys

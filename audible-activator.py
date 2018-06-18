@@ -1,19 +1,25 @@
 #!/usr/bin/env python2
 
-from __future__ import print_function
-from getpass import getpass
-from optparse import OptionParser
+import os
 import sys
 import time
-from selenium import webdriver
-from urllib import urlencode
-from urlparse import urlparse, parse_qsl
-import hashlib
 import base64
-import requests
-import os
 import common
+import hashlib
 import binascii
+import requests
+from getpass import getpass
+from selenium import webdriver
+from optparse import OptionParser
+
+PY3 = sys.version_info[0] == 3
+
+if PY3:
+    from urllib.parse import urlencode
+    from urllib.parse import urlparse, parse_qsl
+else:
+    from urllib import urlencode
+    from urlparse import urlparse, parse_qsl
 
 
 def fetch_activation_bytes(username, password, options):
@@ -157,7 +163,10 @@ if __name__ == "__main__":
         username = options.username
         password = options.password
     else:
-        username = raw_input("Username: ")
+        if PY3:
+            username = input("Username: ")
+        else:
+            username = raw_input("Username: ")
         password = getpass("Password: ")
 
     fetch_activation_bytes(username, password, options)

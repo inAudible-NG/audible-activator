@@ -150,3 +150,5 @@ testing and fixing this program.
 * wolfi101 (Firefox support)
 
 * corbolais (chromedriver autodetection)
+
+* Thies Mueller (td00, Python 3 support)
