@@ -43,7 +43,7 @@ def fetch_activation_bytes(username, password, options):
         login_url = login_url.replace('.com', "." + lang)
         base_url = base_url.replace('.com', "." + lang)
 
-    player_id = base64.encodestring(hashlib.sha1("").digest()).rstrip()  # keep this same to avoid hogging activation slots
+    player_id = base64.encodestring(hashlib.sha1("".encode('utf-8')).digest()).rstrip()  # keep this same to avoid hogging activation slots
     if options.player_id:
         player_id = base64.encodestring(binascii.unhexlify(options.player_id)).rstrip()
     print("[*] Player ID is %s" % player_id)
