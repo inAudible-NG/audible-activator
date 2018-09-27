@@ -23,7 +23,7 @@ Options:
   -d, --debug           run program in debug mode, enable this for 2FA enabled
                         accounts or for authentication debugging
   -f, --firefox         use this option to use firefox instead of chrome
-  -l LANG, --lang=LANG  us (default) / de / fr / uk (untested)
+  -l LANG, --lang=LANG  us (default) / de / fr / jp / uk (untested)
   -p PLAYER_ID          Player ID in hex (for debugging, not for end users)
   --username=USERNAME   Audible username, use along with the --password option
   --password=PASSWORD   Audible password

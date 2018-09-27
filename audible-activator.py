@@ -39,6 +39,9 @@ def fetch_activation_bytes(username, password, options):
     if lang == "uk":
         login_url = login_url.replace('.com', ".co.uk")
         base_url = base_url.replace('.com', ".co.uk")
+    elif lang == "jp":
+        login_url = login_url.replace('.com', ".co.jp")
+        base_url = base_url.replace('.com', ".co.jp")
     elif lang != "us":  # something more clever might be needed
         login_url = login_url.replace('.com', "." + lang)
         base_url = base_url.replace('.com', "." + lang)
@@ -141,7 +144,7 @@ if __name__ == "__main__":
                       action="store",
                       dest="lang",
                       default="us",
-                      help="us (default) / de / fr / uk (untested)",)
+                      help="us (default) / de / fr / jp / uk (untested)",)
     parser.add_option("-p",
                       action="store",
                       dest="player_id",
