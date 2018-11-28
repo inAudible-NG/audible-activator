@@ -39,11 +39,16 @@ def fetch_activation_bytes(username, password, options):
     if lang == "uk":
         login_url = login_url.replace('.com', ".co.uk")
         base_url = base_url.replace('.com', ".co.uk")
+    elif lang == "jp":
+        login_url = login_url.replace('.com', ".co.jp")
+        base_url = base_url.replace('.com', ".co.jp")
     elif lang != "us":  # something more clever might be needed
         login_url = login_url.replace('.com', "." + lang)
         base_url = base_url.replace('.com', "." + lang)
 
-    player_id = base64.encodestring(hashlib.sha1("").digest()).rstrip()  # keep this same to avoid hogging activation slots
+    player_id = base64.encodestring(hashlib.sha1(b"").digest()).rstrip()  # keep this same to avoid hogging activation slots
+    if PY3:
+        player_id = player_id.decode("ascii")
     if options.player_id:
         player_id = base64.encodestring(binascii.unhexlify(options.player_id)).rstrip()
     print("[*] Player ID is %s" % player_id)
@@ -62,8 +67,10 @@ def fetch_activation_bytes(username, password, options):
     else:
         if sys.platform == 'win32':
             chromedriver_path = "chromedriver.exe"
-        elif os.path.isfile("/usr/lib/chromium-browser/chromedriver"): # Ubuntu package chromedriver path
+        elif os.path.isfile("/usr/lib/chromium-browser/chromedriver"):  # Ubuntu package chromedriver path
             chromedriver_path = "/usr/lib/chromium-browser/chromedriver"
+        elif os.path.isfile("/usr/local/bin/chromedriver"):  # macOS + Homebrew
+            chromedriver_path = "/usr/local/bin/chromedriver"
         else:
             chromedriver_path = "./chromedriver"
 
@@ -141,7 +148,7 @@ if __name__ == "__main__":
                       action="store",
                       dest="lang",
                       default="us",
-                      help="us (default) / de / fr / uk (untested)",)
+                      help="us (default) / de / fr / jp / uk (untested)",)
     parser.add_option("-p",
                       action="store",
                       dest="player_id",

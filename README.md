@@ -3,8 +3,8 @@
 A script to retrieve your activation data (activation_bytes) from Audible
 servers.
 
-Last tested on macOS 10.13.5 + Google Chrome 67 + ChromeDriver 2.40 in
-June, 2018.
+Last tested on macOS 10.14.1 + Google Chrome 70 + ChromeDriver 2.44 in
+November, 2018.
 
 ## Donations
 
@@ -23,7 +23,7 @@ Options:
   -d, --debug           run program in debug mode, enable this for 2FA enabled
                         accounts or for authentication debugging
   -f, --firefox         use this option to use firefox instead of chrome
-  -l LANG, --lang=LANG  us (default) / de / fr / uk (untested)
+  -l LANG, --lang=LANG  us (default) / de / fr / jp / uk (untested)
   -p PLAYER_ID          Player ID in hex (for debugging, not for end users)
   --username=USERNAME   Audible username, use along with the --password option
   --password=PASSWORD   Audible password
@@ -44,8 +44,8 @@ $ ffplay -activation_bytes CAFED00D sample.aax
 
 ## Quick Setup
 
-Python 2 is required along with Selenium, Requests, ChromeDriver, and Google
-Chrome.
+Python 2 (or Python >= 3.6) is required along with Selenium, Requests,
+ChromeDriver, and Google Chrome.
 
 ```
 pip install --user requests  # use "easy_install" if pip is missing
@@ -152,3 +152,7 @@ testing and fixing this program.
 * corbolais (chromedriver autodetection)
 
 * Thies Mueller (td00, Python 3 support)
+
+* Ziyuan Guo (shadowmourne, Audible JP support)
+
+* Ryan Connors (ryanpconnors, Python 3 fixes)
