@@ -42,6 +42,9 @@ def fetch_activation_bytes(username, password, options):
     elif lang == "jp":
         login_url = login_url.replace('.com', ".co.jp")
         base_url = base_url.replace('.com', ".co.jp")
+    elif lang == "in":
+        login_url = login_url.replace('.com', ".in")
+        base_url = base_url.replace('.com', ".in")
     elif lang != "us":  # something more clever might be needed
         login_url = login_url.replace('.com', "." + lang)
         base_url = base_url.replace('.com', "." + lang)
