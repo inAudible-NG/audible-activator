@@ -104,6 +104,11 @@ all used up).
 * In case of login problems use the `./audible-activator.py -d` command  to run
 the program in debugging mode and to login manually.
 
+* If you get an error in your terminal about selenium (such as 
+`selenium.common.exceptions.WebDriverException: Message: unknown error: call
+function result missing 'value'`), make sure you have the most recent chromedriver
+version. You may need to uninstall and reinstall it.
+
 * This program is pretty short and easy to debug. I cannot provide end-user
 support but I would be very happy to accept patches.
 
