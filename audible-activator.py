@@ -72,7 +72,7 @@ def fetch_activation_bytes(username, password, options):
         elif os.path.isfile("/usr/local/bin/chromedriver"):  # macOS + Homebrew
             chromedriver_path = "/usr/local/bin/chromedriver"
         else:
-            chromedriver_path = "./chromedriver"
+            chromedriver_path = "chromedriver"
 
 
         driver = webdriver.Chrome(chrome_options=opts,
