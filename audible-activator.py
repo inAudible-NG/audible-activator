@@ -93,6 +93,8 @@ def fetch_activation_bytes(username, password, options):
         search_box.submit()
         time.sleep(2)  # give the page some time to load
 
+    raw_input("Now you may have to enter a one-time password manually. Once you are done, press enter to continue...")
+
     # Step 2
     driver.get(base_url + 'player-auth-token?playerType=software&bp_ua=y&playerModel=Desktop&playerId=%s&playerManufacturer=Audible&serial=' % (player_id))
     current_url = driver.current_url
