@@ -23,7 +23,7 @@ Options:
   -d, --debug           run program in debug mode, enable this for 2FA enabled
                         accounts or for authentication debugging
   -f, --firefox         use this option to use firefox instead of chrome
-  -l LANG, --lang=LANG  us (default) / de / fr / jp / uk (untested)
+  -l LANG, --lang=LANG  us (default) / de / fr / jp / uk (untested) / in
   -p PLAYER_ID          Player ID in hex (for debugging, not for end users)
   --username=USERNAME   Audible username, use along with the --password option
   --password=PASSWORD   Audible password
@@ -156,3 +156,7 @@ testing and fixing this program.
 * Ziyuan Guo (shadowmourne, Audible JP support)
 
 * Ryan Connors (ryanpconnors, Python 3 fixes)
+
+* Savio Sebastian (savioseb) - Support for Audible India
+
+* See https://github.com/inAudible-NG/audible-activator/pulls.

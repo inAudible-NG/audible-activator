@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import os
 import sys
@@ -45,6 +45,9 @@ def fetch_activation_bytes(username, password, options):
     elif lang == "au":
         login_url = login_url.replace('.com', ".com.au")
         base_url = base_url.replace('.com', ".com.au")
+    elif lang == "in":
+        login_url = login_url.replace('.com', ".in")
+        base_url = base_url.replace('.com', ".in")
     elif lang != "us":  # something more clever might be needed
         login_url = login_url.replace('.com', "." + lang)
         base_url = base_url.replace('.com', "." + lang)
@@ -70,6 +73,8 @@ def fetch_activation_bytes(username, password, options):
     else:
         if sys.platform == 'win32':
             chromedriver_path = "chromedriver.exe"
+         elif os.path.isfile("/usr/bin/chromedriver"):  # Debian/Ubuntu package's chromedriver path
+            chromedriver_path = "/usr/bin/chromedriver"
         elif os.path.isfile("/usr/lib/chromium-browser/chromedriver"):  # Ubuntu package chromedriver path
             chromedriver_path = "/usr/lib/chromium-browser/chromedriver"
         elif os.path.isfile("/usr/local/bin/chromedriver"):  # macOS + Homebrew
