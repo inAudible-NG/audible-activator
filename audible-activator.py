@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import os
 import sys
@@ -42,13 +42,21 @@ def fetch_activation_bytes(username, password, options):
     elif lang == "jp":
         login_url = login_url.replace('.com', ".co.jp")
         base_url = base_url.replace('.com', ".co.jp")
+    elif lang == "au":
+        login_url = login_url.replace('.com', ".com.au")
+        base_url = base_url.replace('.com', ".com.au")
+    elif lang == "in":
+        login_url = login_url.replace('.com', ".in")
+        base_url = base_url.replace('.com', ".in")
     elif lang != "us":  # something more clever might be needed
         login_url = login_url.replace('.com', "." + lang)
         base_url = base_url.replace('.com', "." + lang)
 
-    player_id = base64.encodestring(hashlib.sha1(b"").digest()).rstrip()  # keep this same to avoid hogging activation slots
     if PY3:
+        player_id = base64.encodebytes(hashlib.sha1(b"").digest()).rstrip()  # keep this same to avoid hogging activation slots
         player_id = player_id.decode("ascii")
+    else:
+        player_id = base64.encodestring(hashlib.sha1(b"").digest()).rstrip()
     if options.player_id:
         player_id = base64.encodestring(binascii.unhexlify(options.player_id)).rstrip()
     print("[*] Player ID is %s" % player_id)
@@ -67,6 +75,8 @@ def fetch_activation_bytes(username, password, options):
     else:
         if sys.platform == 'win32':
             chromedriver_path = "chromedriver.exe"
+        elif os.path.isfile("/usr/bin/chromedriver"):  # Debian/Ubuntu package's chromedriver path
+            chromedriver_path = "/usr/bin/chromedriver"
         elif os.path.isfile("/usr/lib/chromium-browser/chromedriver"):  # Ubuntu package chromedriver path
             chromedriver_path = "/usr/lib/chromium-browser/chromedriver"
         elif os.path.isfile("/usr/local/bin/chromedriver"):  # macOS + Homebrew
@@ -75,7 +85,7 @@ def fetch_activation_bytes(username, password, options):
             chromedriver_path = "./chromedriver"
 
 
-        driver = webdriver.Chrome(chrome_options=opts,
+        driver = webdriver.Chrome(options=opts,
                                   executable_path=chromedriver_path)
 
     query_string = urlencode(payload)
@@ -92,6 +102,16 @@ def fetch_activation_bytes(username, password, options):
         search_box.send_keys(password)
         search_box.submit()
         time.sleep(2)  # give the page some time to load
+
+    # Apparently, automated logins get detected now. The user receives a
+    # one-time password via email and is asked to type it into a textbox.
+    # After login pause and give user a chance to enter one-time password
+    # manually.
+    msg = "\nATTENTION: Now you may have to enter a one-time password manually. Once you are done, press enter to continue..."
+    if PY3:
+        input(msg)
+    else:
+        raw_input(msg)
 
     # Step 2
     driver.get(base_url + 'player-auth-token?playerType=software&bp_ua=y&playerModel=Desktop&playerId=%s&playerManufacturer=Audible&serial=' % (player_id))
@@ -148,7 +168,7 @@ if __name__ == "__main__":
                       action="store",
                       dest="lang",
                       default="us",
-                      help="us (default) / de / fr / jp / uk (untested)",)
+                      help="us (default) / au / in / de / fr / jp / uk (untested)",)
     parser.add_option("-p",
                       action="store",
                       dest="player_id",

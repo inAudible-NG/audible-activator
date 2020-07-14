@@ -3,8 +3,12 @@
 A script to retrieve your activation data (activation_bytes) from Audible
 servers.
 
-Last tested on macOS 10.14.1 + Google Chrome 70 + ChromeDriver 2.44 in
-November, 2018.
+Last tested on Ubuntu 20.04 + Chromium 83.x + chromium-chromedriver (83.0.x) +
+Python 3.8.x in July 2020.
+
+July-2020 update: https://github.com/openaudible/openaudible folks have stolen
+this `central principal component` code + "IP" and have created a
+non-100%-free-source commercial product with it.
 
 ## Donations
 
@@ -23,7 +27,7 @@ Options:
   -d, --debug           run program in debug mode, enable this for 2FA enabled
                         accounts or for authentication debugging
   -f, --firefox         use this option to use firefox instead of chrome
-  -l LANG, --lang=LANG  us (default) / de / fr / jp / uk (untested)
+  -l LANG, --lang=LANG  us (default) / au / in / de / fr / jp / uk (untested)
   -p PLAYER_ID          Player ID in hex (for debugging, not for end users)
   --username=USERNAME   Audible username, use along with the --password option
   --password=PASSWORD   Audible password
@@ -104,6 +108,11 @@ all used up).
 * In case of login problems use the `./audible-activator.py -d` command  to run
 the program in debugging mode and to login manually.
 
+* If you get an error in your terminal about selenium (such as
+`selenium.common.exceptions.WebDriverException: Message: unknown error: call
+function result missing 'value'`), make sure you have the most recent
+*compatible* chromedriver version. You may need to uninstall and reinstall it.
+
 * This program is pretty short and easy to debug. I cannot provide end-user
 support but I would be very happy to accept patches.
 
@@ -156,3 +165,13 @@ testing and fixing this program.
 * Ziyuan Guo (shadowmourne, Audible JP support)
 
 * Ryan Connors (ryanpconnors, Python 3 fixes)
+
+* Savio Sebastian (savioseb) - Support for Audible India
+
+* Rod Vagg (rvagg) - Support for Audible Australia
+
+* Jason (JasonMFry) - ChromeDriver debugging tip
+
+* Stefan Gränitz (weliveindetail) - Make authentication reliable
+
+* See https://github.com/inAudible-NG/audible-activator/pulls.
