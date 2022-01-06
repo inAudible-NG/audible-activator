@@ -30,9 +30,10 @@ def fetch_activation_bytes(username, password, options):
     # Step 0
     opts = webdriver.ChromeOptions()
     opts.add_argument("user-agent=Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko")
-    opts.add_argument('--headless')
     opts.add_argument('--no-sandbox')
     opts.add_argument('--disable-dev-shm-usage')
+    if not options.debug:
+        opts.add_argument('--headless')
 
     # Step 1
     if '@' in username:  # Amazon login using email address
